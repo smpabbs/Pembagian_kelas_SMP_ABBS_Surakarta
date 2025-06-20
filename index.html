@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pencarian Siswa Kelas 7 | Sekolah XYZ</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+    <style>
+        :root {
+            --primary: #128C7E;
+            --primary-dark: #075E54;
+            --primary-light: #25D366;
+            --secondary: #F0F2F5;
+            --text: #333333;
+            --text-light: #666666;
+            --white: #FFFFFF;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9f9f9;
+            color: var(--text);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: var(--white);
+            padding: 1.5rem 0;
+            box-shadow: var(--shadow);
+            position: relative;
+            z-index: 10;
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        
+        .logo i {
+            font-size: 2rem;
+        }
+        
+        .logo-text h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+        
+        .logo-text p {
+            font-size: 0.8rem;
+            opacity: 0.9;
+        }
+        
+        /* Main Content */
+        main {
+            flex: 1;
+            padding: 2rem 0;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        /* Search Section */
+        .search-section {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+        
+        .search-title {
+            color: var(--primary-dark);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+        
+        .search-box {
+            position: relative;
+            margin-bottom: 1rem;
+        }
+        
+        #search {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            font-size: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 50px;
+            outline: none;
+            transition: all 0.3s;
+            padding-left: 3rem;
+        }
+        
+        #search:focus {
+            border-color: var(--primary-light);
+            box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.2);
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+        }
+        
+        /* Results Section */
+        .initial-state, .no-results {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 3rem 2rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+        
+        .initial-state i, .no-results i {
+            font-size: 4rem;
+            color: var(--primary-light);
+            margin-bottom: 1.5rem;
+            opacity: 0.8;
+        }
+        
+        .initial-state h2, .no-results h3 {
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .initial-state p, .no-results p {
+            color: var(--text-light);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        /* Student Card */
+        .student-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .student-info {
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .student-name {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .student-class {
+            display: inline-block;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--white);
+            background: linear-gradient(135deg, var(--primary-light), var(--primary-dark));
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .whatsapp-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            align-items: center;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px dashed #e0e0e0;
+        }
+        
+        .whatsapp-btn {
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            color: var(--white);
+            border: none;
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 4px 8px rgba(37, 211, 102, 0.3);
+        }
+        
+        .whatsapp-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(37, 211, 102, 0.4);
+        }
+        
+        .qrcode-container {
+            background: var(--white);
+            padding: 1rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 200px;
+            margin: 0 auto;
+        }
+        
+        #qrcode {
+            display: flex;
+            justify-content: center;
+            margin: 0 auto;
+        }
+        
+        .qrcode-container p {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+        
+        .contact-notification {
+            background-color: #FFF9E6;
+            border-left: 4px solid #FFC107;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            text-align: left;
+            max-width: 500px;
+            margin: 1.5rem auto 0;
+        }
+        
+        .contact-notification a {
+            color: var(--primary-dark);
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .contact-notification a:hover {
+            text-decoration: underline;
+        }
+        
+        .contact-notification i {
+            color: var(--primary-light);
+        }
+        
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: var(--white);
+            padding: 2rem 0;
+            margin-top: auto;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            text-align: center;
+        }
+        
+        .school-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .school-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .school-address {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .social-links a {
+            color: var(--white);
+            font-size: 1.5rem;
+            transition: opacity 0.3s;
+        }
+        
+        .social-links a:hover {
+            opacity: 0.8;
+        }
+        
+        .copyright {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            margin-top: 1rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .whatsapp-section {
+                flex-direction: column;
+            }
+            
+            .student-name {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                <div class="logo-text">
+                    <h1>SMP ABBS Surakarta</h1>
+                    <p>Bring Excellence Beyond the Limits</p>
+                </div>
+            </div>
+            <div class="school-year">
+                Tahun Ajaran 2023/2024
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <section class="search-section">
+                <h2 class="search-title">PEMBAGIAN KELAS SEMENTARA</h2>
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="search" placeholder="Ketik nama siswa..." autocomplete="off" autofocus>
+                </div>
+                <p>Temukan informasi siswa dan bergabung ke grup WhatsApp kelas</p>
+            </section>
+            
+            <div id="results-container">
+                <div id="initial-state" class="initial-state">
+                    <i class="fas fa-search"></i>
+                    <h2>Cari Siswa Kelas 7</h2>
+                    <p>Masukkan nama siswa di kolom pencarian di atas untuk menemukan informasi kelas dan grup WhatsApp resmi</p>
+                </div>
+                
+                <div id="no-results" class="no-results" style="display: none;">
+                    <i class="fas fa-user-times"></i>
+                    <h3>Siswa tidak ditemukan</h3>
+                    <p>Pastikan penulisan nama sudah benar</p>
+                    
+                    <div class="contact-notification">
+                        <p>Jika masih tidak dapat menemukan data Anda, silahkan hubungi:</p>
+                        <a href="https://wa.me/628158842661" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                            Mis Sinta (WA: 08158842661)
+                        </a>
+                    </div>
+                </div>
+                
+                <div id="student-card" class="student-card">
+                    <div class="student-info">
+                        <div class="student-name" id="student-name"></div>
+                        <div class="student-class" id="student-class"></div>
+                    </div>
+                    
+                    <div class="whatsapp-section">
+                        <a id="whatsapp-btn" class="whatsapp-btn" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                            Gabung Grup WhatsApp Kelas
+                        </a>
+                        
+                        <div class="qrcode-container">
+                            <div id="qrcode"></div>
+                            <p>Scan QR Code untuk bergabung</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="school-info">
+                <div class="school-name">SMP ABBS Surakarta</div>
+                <div class="school-address">Jl.Tarumanegara III, Banyuanyar, Banjarsari, Surakarta</div>
+            </div>
+            
+           
+            
+            <div class="copyright">
+                &copy; 2025 SMP ABBS Surakrta.
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Data siswa kelas 7A-7F
+        const students = [
+            { nama: "Darrel Wili Bara", kelas: "7A" },
+            { nama: "Al-Fath Fitra Akbar Rizqullah", kelas: "7A" },
+            { nama: "Muhammad Abid Aqeela Pranaja", kelas: "7A" },
+            { nama: "Muhammad Al Fathan Yulianto", kelas: "7A" },
+            { nama: "Hanif Albarri Dzulfiqar", kelas: "7A" },
+            { nama: "Muzaffar Fathan K", kelas: "7A" },
+            { nama: "ALFARO FAHMI FAZATAMA", kelas: "7A" },
+            { nama: "Thoriq Andira Putra", kelas: "7A" },
+            { nama: "Hadrian Juvenal Putra Disena", kelas: "7A" },
+            { nama: "Akhdan Dzaki Fauzan Amanullah", kelas: "7A" },
+            { nama: "El Arronabil Tiang Negara", kelas: "7A" },
+            { nama: "Astatanu Farras Vilosa", kelas: "7A" },
+            { nama: "Muhammad Dhava Aji Saputra", kelas: "7A" },
+            { nama: "Oza Dua A Deta", kelas: "7A" },
+            { nama: "faith quraisy zada", kelas: "7A" },
+            { nama: "Kei Kafi Al Ghazali", kelas: "7A" },
+            { nama: "Salman Al Farisi", kelas: "7A" },
+            { nama: "Fahim Ahkam Nur Hisyam", kelas: "7A" },
+            { nama: "Deodan Ravindra", kelas: "7A" },
+            { nama: "Ammar Sakhi Al Faruq", kelas: "7A" },
+            { nama: "Muhammad Brillian Rahadianjaya", kelas: "7A" },
+            { nama: "Bimasena Gibran Putra Natha", kelas: "7A" },
+            { nama: "Muhammad Abrisam Wafiy Maulana", kelas: "7A" },
+            { nama: "Ikhbar Firdaus Al Ahnaf", kelas: "7A" },
+            { nama: "Muhammad Arfa Ammar Rasyidin", kelas: "7A" },
+            { nama: "Jefry Sakha Apriano", kelas: "7A" },
+            { nama: "M Faatih Seferagic Althafurrahman", kelas: "7A" },
+            { nama: "Taufiq Musyaffa Alamsyah", kelas: "7A" },
+            { nama: "Ghaazi Ahmad Rasyad", kelas: "7A" },
+            { nama: "Benaufal De Rossi", kelas: "7A" },
+            { nama: "Fathan Athallah Tiedy", kelas: "7A" },
+            { nama: "Haidar Rasyid Al Ghifari", kelas: "7A" },
+            { nama: "Muhammad Yardan Daniswara", kelas: "7A" },
+            { nama: "Muhammad Hariz Ariwibawa", kelas: "7A" },
+            { nama: "Fadhil Aqeela Abimanyu", kelas: "7B" },
+            { nama: "Abraham Javier", kelas: "7B" },
+            { nama: "Arthur Afzal Suseno", kelas: "7B" },
+            { nama: "Razan Fadhil Sukoco", kelas: "7B" },
+            { nama: "Hamdan Auriga Abimanyu", kelas: "7B" },
+            { nama: "Barkliw Ibnu Husain Maos Jagad", kelas: "7B" },
+            { nama: "Faeyza Izzul Grestama", kelas: "7B" },
+            { nama: "Parvez Muhammad Z", kelas: "7B" },
+            { nama: "Hafizh Radya Kurnia", kelas: "7B" },
+            { nama: "Hammasy Kayyis Syauqillah", kelas: "7B" },
+            { nama: "Alvaro Kenzo Nugroho", kelas: "7B" },
+            { nama: "Dzuan Havist Arkananta", kelas: "7B" },
+            { nama: "Sultan Rasyid Habibi", kelas: "7B" },
+            { nama: "Arkan Rawlins Rasendria", kelas: "7B" },
+            { nama: "Bilal Hasan Damarjati", kelas: "7B" },
+            { nama: "Ahza Muhammad Fayiz", kelas: "7B" },
+            { nama: "Naufal Nur Kahfi", kelas: "7B" },
+            { nama: "Fahri Abdullah Tsaqib", kelas: "7B" },
+            { nama: "Ara Azyan Fadli", kelas: "7B" },
+            { nama: "MUHAMMAD FIKRY AL KHOZINIE", kelas: "7B" },
+            { nama: "Al Ghaffar Rizki Dapriyanto", kelas: "7B" },
+            { nama: "Ivandam Aristo Wibowo", kelas: "7B" },
+            { nama: "Ferendra Putra Agdhianto", kelas: "7B" },
+            { nama: "Muhammad Alwi", kelas: "7B" },
+            { nama: "Muhammad Faishal", kelas: "7B" },
+            { nama: "Abilio Naoki S", kelas: "7B" },
+            { nama: "Razqa Abiyyu Sakha", kelas: "7B" },
+            { nama: "Raditya Tristan Suryapradana", kelas: "7B" },
+            { nama: "Barra Madritirta Hamiseno", kelas: "7B" },
+            { nama: "IZZ NUR FAUZAN", kelas: "7B" },
+            { nama: "Nayaka Aqeela Syahreza", kelas: "7B" },
+            { nama: "Keenand Husna Hudallah", kelas: "7B" },
+            { nama: "Muhammad Keane Kaleho", kelas: "7B" },
+            { nama: "Qiandra Adhiyastama Fathony", kelas: "7C" },
+            { nama: "Affan Fadhil Abyan", kelas: "7C" },
+            { nama: "Juan Maziz Anargya", kelas: "7C" },
+            { nama: "Muhammad Navies", kelas: "7C" },
+            { nama: "Aerobanyu Firdaus Sigkamulya", kelas: "7C" },
+            { nama: "Adhyasta Akbar", kelas: "7C" },
+            { nama: "Abidzar Kamil Junior Santoso", kelas: "7C" },
+            { nama: "Fathan", kelas: "7C" },
+            { nama: "Ardiansyah Kusumawardana", kelas: "7C" },
+            { nama: "Kenichi Jusuf Adicandra", kelas: "7C" },
+            { nama: "Muhammad Daffa Arya Gozzan", kelas: "7C" },
+            { nama: "Ahmad Mughni Alifsamputra", kelas: "7C" },
+            { nama: "Gaza Fadi Mustajab", kelas: "7C" },
+            { nama: "Azka Daniswara Hardi Ramadhan", kelas: "7C" },
+            { nama: "Naizar Faeyza Ahnaf", kelas: "7C" },
+            { nama: "Faeyza arfamaula sukmadi", kelas: "7C" },
+            { nama: "Eno Kurniawan Dkelces", kelas: "7C" },
+            { nama: "Muhammad Aldi Rizano", kelas: "7C" },
+            { nama: "Muhammad Faqih Abdullah Nugroho", kelas: "7C" },
+            { nama: "Sultan Virga Nayaka Fithriadi", kelas: "7C" },
+            { nama: "Nafitsani Aryasatya Wibowo", kelas: "7C" },
+            { nama: "Muammar Galang Al Rafii", kelas: "7C" },
+            { nama: "Kenzie Rangga bahana", kelas: "7C" },
+            { nama: "Gilby Alauna Rowi", kelas: "7C" },
+            { nama: "Afna Zam Iltizam", kelas: "7C" },
+            { nama: "Naufal Rosiduddin Syarif", kelas: "7C" },
+            { nama: "MUHAMMAD RO'ID JIYAD", kelas: "7C" },
+            { nama: "Jayden attallah haryatmoko", kelas: "7C" },
+            { nama: "Nazran Ar Rais", kelas: "7C" },
+            { nama: "Muhammad Abimanyu Wicaksono", kelas: "7C" },
+            { nama: "Riyadhul Jinan Husni", kelas: "7C" },
+            { nama: "Ahmad Maulana Hakim", kelas: "7C" },
+            { nama: "Raditya Furqon Ar Rashid", kelas: "7C" },
+            { nama: "Ayse Hygela Destyara", kelas: "7D" },
+            { nama: "Dewi Aulia Putri Fieta", kelas: "7D" },
+            { nama: "Kamila 'Aisy Risqiya", kelas: "7D" },
+            { nama: "Karaissa Amirah Nailatul Izzah", kelas: "7D" },
+            { nama: "Latifa nadira hafidzah", kelas: "7D" },
+            { nama: "Azalea Anara Khalisa Putri", kelas: "7D" },
+            { nama: "Naquita Azzahra Dira", kelas: "7D" },
+            { nama: "Farsya Mumtazaha Al Farabi", kelas: "7D" },
+            { nama: "Zerra Kiana Al Is'aff", kelas: "7D" },
+            { nama: "Az Zahra Elvira Virzandi Ardian", kelas: "7D" },
+            { nama: "KHANZA ALKAYLA GUNAWAN", kelas: "7D" },
+            { nama: "Nasywa Khoirunnisa", kelas: "7D" },
+            { nama: "Shodan Fatiha Syakira Khansa", kelas: "7D" },
+            { nama: "Nurazizahtul Fadhillah Ahmad", kelas: "7D" },
+            { nama: "Aqila Nashwa Isnania", kelas: "7D" },
+            { nama: "Fariha Ayla Zahra Attaufiq", kelas: "7D" },
+            { nama: "Adiva Putri Hanan Diandra", kelas: "7D" },
+            { nama: "Efa Nur'aini", kelas: "7D" },
+            { nama: "Nafusah Azizah", kelas: "7D" },
+            { nama: "Almasyifa Kanaya Bathi", kelas: "7D" },
+            { nama: "Lakeisha Anindya Harjanto", kelas: "7D" },
+            { nama: "Cahaya Ramadhani", kelas: "7D" },
+            { nama: "Zahrah Zhufairah Santoso", kelas: "7D" },
+            { nama: "Ainun Nissa Nabillah Hebat", kelas: "7D" },
+            { nama: "Arteria Kania Sofyan", kelas: "7D" },
+            { nama: "Adifa Fatin Maghfirah", kelas: "7D" },
+            { nama: "Andhina Violeta Pramatyadeva", kelas: "7D" },
+            { nama: "Afifah Ayu Nur Iskhalifah", kelas: "7E" },
+            { nama: "Hasna Latifah", kelas: "7E" },
+            { nama: "Nadhifa Amalia", kelas: "7E" },
+            { nama: "Haifa Kaila E", kelas: "7E" },
+            { nama: "Zhaafirah Fadhilah Putri S.B", kelas: "7E" },
+            { nama: "Sarah Azzahra Kurniadi", kelas: "7E" },
+            { nama: "Chayra Zoya Al Hidayat", kelas: "7E" },
+            { nama: "Syalia Zahraina Rahmadi", kelas: "7E" },
+            { nama: "Khanza Aghnia Janneta", kelas: "7E" },
+            { nama: "Chesta Adlina Zakiyah", kelas: "7E" },
+            { nama: "ARUMY JASMINE YANURI", kelas: "7E" },
+            { nama: "Sheza Aleesya danurdara", kelas: "7E" },
+            { nama: "Ranyshia Putri Prasetyo", kelas: "7E" },
+            { nama: "Kayyisa Alifa Salma", kelas: "7E" },
+            { nama: "Khanza Aqiila Widary Suparno", kelas: "7E" },
+            { nama: "Aya Sofya soetino", kelas: "7E" },
+            { nama: "Tamara Amelia", kelas: "7E" },
+            { nama: "Dzakiya Uzma Salsabila", kelas: "7E" },
+            { nama: "Gradesya Derrella Zian Khatulistiwa", kelas: "7E" },
+            { nama: "Khansa Khaira Syahida", kelas: "7E" },
+            { nama: "Maheswara Tribuwana Tunggadewi", kelas: "7E" },
+            { nama: "Khansa Tasmira Uzda", kelas: "7E" },
+            { nama: "Rifda Khalisa Mannaf", kelas: "7E" },
+            { nama: "Raisa Adila Lathifa", kelas: "7E" },
+            { nama: "Marsha Khumaira Wibowo", kelas: "7E" },
+            { nama: "Arini Zhafirah Putri", kelas: "7E" },
+            { nama: "Kirana Ramadhania Larasati", kelas: "7E" },
+            { nama: "Tiara Sekar Nareswari", kelas: "7F" },
+            { nama: "Aufa Erhusna", kelas: "7F" },
+            { nama: "Husna Fadhila Az zahra", kelas: "7F" },
+            { nama: "Deandra Raissa Anthony", kelas: "7F" },
+            { nama: "Zara Nadia Akhyar", kelas: "7F" },
+            { nama: "Putri Aqila Zaneta", kelas: "7F" },
+            { nama: "Fazila Inas Tasnim Mimosa", kelas: "7F" },
+            { nama: "Azizah Nirmala Putri", kelas: "7F" },
+            { nama: "Jehanara Arimbi Zuhairiyah Ahmad", kelas: "7F" },
+            { nama: "Kuni Rafa Saira", kelas: "7F" },
+            { nama: "Daevika Syarifa Sunarto Putri", kelas: "7F" },
+            { nama: "Zahwa Zahira Zahsy", kelas: "7F" },
+            { nama: "Khalisa Fahma M", kelas: "7F" },
+            { nama: "Naura Hidayatul Muslihah", kelas: "7F" },
+            { nama: "Camile Adelia", kelas: "7F" },
+            { nama: "Maylin Zahira", kelas: "7F" },
+            { nama: "Althafunnisa", kelas: "7F" },
+            { nama: "Khansa Aqila Aljaneta", kelas: "7F" },
+            { nama: "Kayyisa Naura Rafifah", kelas: "7F" },
+            { nama: "Afrin Rumaisha", kelas: "7F" },
+            { nama: "Nasyafa Azzahra Putri", kelas: "7F" },
+            { nama: "Asha Kurniadynata", kelas: "7F" },
+            { nama: "Khanza Atha Rohidah", kelas: "7F" },
+            { nama: "Yovinda", kelas: "7F" },
+            { nama: "Nagisa Sachi Swardani", kelas: "7F" },
+            { nama: "Aldila Zahrana Rahmadita", kelas: "7F" },
+            { nama: "Azenda Zavania Bilqis", kelas: "7F" }
+        ];
+
+        // Link grup WhatsApp per kelas
+        const whatsappGroups = {
+            "7A": "https://chat.whatsapp.com/G786Lbbwt9R3XtqjyUluXh",
+            "7B": "https://chat.whatsapp.com/GMLx4aZoxenIBMR8Eew33g",
+            "7C": "https://chat.whatsapp.com/E8EDQzBevl5H1AP4eG1ls0",
+            "7D": "https://chat.whatsapp.com/C6WNbzlb0dQBdMBudncdXk",
+            "7E": "https://chat.whatsapp.com/KqHcYwlv8XHHwG32Kh87fu",
+            "7F": "https://chat.whatsapp.com/DJLSOptqSlZGdpfUJvulf8"
+        };
+
+        // Elemen UI
+        const searchInput = document.getElementById('search');
+        const initialState = document.getElementById('initial-state');
+        const noResults = document.getElementById('no-results');
+        const studentCard = document.getElementById('student-card');
+        const studentName = document.getElementById('student-name');
+        const studentClass = document.getElementById('student-class');
+        const whatsappBtn = document.getElementById('whatsapp-btn');
+        const qrcodeDiv = document.getElementById('qrcode');
+
+        // Fungsi untuk menampilkan hasil pencarian
+        function showStudentResult(student) {
+            initialState.style.display = 'none';
+            noResults.style.display = 'none';
+            studentCard.style.display = 'block';
+
+            // Set data siswa
+            studentName.textContent = student.nama;
+            studentClass.textContent = student.kelas;
+
+            // Set link WhatsApp
+            const whatsappLink = whatsappGroups[student.kelas];
+            whatsappBtn.href = whatsappLink;
+
+            // Generate QR Code
+            qrcodeDiv.innerHTML = '';
+            new QRCode(qrcodeDiv, {
+                text: whatsappLink,
+                width: 150,
+                height: 150,
+                colorDark: "#075E54",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
+            });
+        }
+
+        // Fungsi untuk menampilkan "tidak ditemukan"
+        function showNoResults() {
+            initialState.style.display = 'none';
+            studentCard.style.display = 'none';
+            noResults.style.display = 'block';
+            
+            // Scroll ke hasil pencarian
+            noResults.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // Fungsi untuk menampilkan state awal
+        function showInitialState() {
+            initialState.style.display = 'block';
+            studentCard.style.display = 'none';
+            noResults.style.display = 'none';
+        }
+
+        // Fungsi untuk memfilter data
+        function filterStudents(searchTerm) {
+            searchTerm = searchTerm.toLowerCase().trim();
+            return students.filter(student => 
+                student.nama.toLowerCase().includes(searchTerm)
+            );
+        }
+
+        // Event listener untuk pencarian
+        searchInput.addEventListener('input', function(e) {
+            const searchTerm = e.target.value;
+            
+            if (searchTerm.length === 0) {
+                showInitialState();
+                return;
+            }
+            
+            const results = filterStudents(searchTerm);
+            
+            if (results.length > 0) {
+                // Ambil hasil pertama (bisa dikembangkan untuk multiple results)
+                showStudentResult(results[0]);
+            } else {
+                showNoResults();
+            }
+        });
+    </script>
+</body>
+</html>
