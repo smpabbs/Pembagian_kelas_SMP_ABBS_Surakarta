@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -377,82 +378,81 @@
     </header>
     
     <!-- Main Content -->
-    <main>
-        <div class="container">
-            <section class="search-section">
-                <h2 class="search-title">PEMBAGIAN KELAS SEMENTARA</h2>
-                 <p>Tuliskan nama ananda disini untuk mendapatkan informasi kelas dan group whatsapp kelas</p>
-                <p>______________</p>
-                <div class="search-box">
-                    <i class="fas fa-search search-icon"></i>
-                    <input type="text" id="search" placeholder="Ketik nama siswa..." autocomplete="off" autofocus>
+    <div class="container">
+        <section class="search-section">
+            <h2 class="search-title">PEMBAGIAN KELAS SEMENTARA</h2>
+             <p>Tuliskan nama ananda disini untuk mendapatkan informasi kelas dan group whatsapp kelas</p>
+            <p>______________</p>
+            <div class="search-box">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="search" placeholder="Ketik nama siswa..." autocomplete="off" autofocus>
+            </div>
+            <ul id="search-results" style="list-style: none; padding: 0; margin: 0; max-height: 300px; overflow-y: auto;"></ul>
+        </section>
+        
+        <div id="results-container">
+            <div id="initial-state" class="initial-state">
+                <i class="fas fa-search"></i>
+                <h2>Cari Siswa Kelas 7</h2>
+                <p>Masukkan nama siswa di kolom pencarian di atas untuk menemukan informasi kelas dan grup WhatsApp resmi</p>
+            </div>
+
+            <div id="no-results" class="no-results" style="display: none;">
+                <i class="fas fa-user-times"></i>
+                <h3>Siswa tidak ditemukan</h3>
+                <p>Pastikan penulisan nama sudah benar</p>
+                
+                <div class="contact-notification">
+                    <p>Jika masih tidak dapat menemukan data Anda, silahkan hubungi:</p>
+                    <a href="https://wa.me/628158842661" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                        Mis Sinta (WA: 08158842661)
+                    </a>
                 </div>
-               
-            </section>
+            </div>
             
-            <div id="results-container">
-                <div id="initial-state" class="initial-state">
-                    <i class="fas fa-search"></i>
-                    <h2>Cari Siswa Kelas 7</h2>
-                    <p>Masukkan nama siswa di kolom pencarian di atas untuk menemukan informasi kelas dan grup WhatsApp resmi</p>
+            <div id="student-card" class="student-card">
+                <div class="student-info">
+                    <div class="student-name" id="student-name"></div>
+                    <div class="student-class" id="student-class"></div>
                 </div>
                 
-                <div id="no-results" class="no-results" style="display: none;">
-                    <i class="fas fa-user-times"></i>
-                    <h3>Siswa tidak ditemukan</h3>
-                    <p>Pastikan penulisan nama sudah benar</p>
+                <div class="whatsapp-section">
+                    <a id="whatsapp-btn" class="whatsapp-btn" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                        Gabung Grup WhatsApp Kelas
+                    </a>
                     
-                    <div class="contact-notification">
-                        <p>Jika masih tidak dapat menemukan data Anda, silahkan hubungi:</p>
-                        <a href="https://wa.me/628158842661" target="_blank">
-                            <i class="fab fa-whatsapp"></i>
-                            Mis Sinta (WA: 08158842661)
-                        </a>
-                    </div>
-                </div>
-                
-                <div id="student-card" class="student-card">
-                    <div class="student-info">
-                        <div class="student-name" id="student-name"></div>
-                        <div class="student-class" id="student-class"></div>
-                    </div>
-                    
-                    <div class="whatsapp-section">
-                        <a id="whatsapp-btn" class="whatsapp-btn" target="_blank">
-                            <i class="fab fa-whatsapp"></i>
-                            Gabung Grup WhatsApp Kelas
-                        </a>
-                        
-                        <div class="qrcode-container">
-                            <div id="qrcode"></div>
-                            <p>Scan QR Code untuk bergabung</p>
-                        </div>
+                    <div class="qrcode-container">
+                        <div id="qrcode"></div>
+                        <p>Scan QR Code untuk bergabung</p>
                     </div>
                 </div>
             </div>
         </div>
-    </main>
-    
-    <!-- Footer -->
-    <footer>
-        <div class="footer-container">
-            <div class="school-info">
-                <div class="school-name">SMP ABBS Surakarta</div>
-                <div class="school-address">Jl.Tarumanegara III, Banyuanyar, Banjarsari, Surakarta</div>
-            </div>
-            
-           
-            
-            <div class="copyright">
-                &copy; 2025 SMP ABBS Surakrta.
-            </div>
+    </div>
+   <!-- Footer -->
+   <footer>
+    <div class="footer-container">
+        <div class="school-info">
+            <div class="school-name">SMP ABBS Surakarta</div>
+            <div class="school-address">Jl.Tarumanegara III, Banyuanyar, Banjarsari, Surakarta</div>
         </div>
-    </footer>
-    
+        
+       
+        
+        <div class="copyright">
+            &copy; 2025 SMP ABBS Surakrta.
+        </div>
+    </div>
+</footer>
+
+    </div>
+
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
     <script>
-        // Data siswa kelas 7A-7F
         const students = [
-            { nama: "Darrel Wili Bara", kelas: "7A" },
+        { nama: "Darrel Wili Bara", kelas: "7A" },
             { nama: "Al-Fath Fitra Akbar Rizqullah", kelas: "7A" },
             { nama: "Muhammad Abid Aqeela Pranaja", kelas: "7A" },
             { nama: "Muhammad Al Fathan Yulianto", kelas: "7A" },
@@ -635,11 +635,12 @@
             { nama: "Nagisa Sachi Swardani", kelas: "7F" },
             { nama: "Aldila Zahrana Rahmadita", kelas: "7F" },
             { nama: "Azenda Zavania Bilqis", kelas: "7F" }
+    
+
         ];
 
-        // Link grup WhatsApp per kelas
         const whatsappGroups = {
-            "7A": "https://chat.whatsapp.com/G786Lbbwt9R3XtqjyUluXh",
+           "7A": "https://chat.whatsapp.com/G786Lbbwt9R3XtqjyUluXh",
             "7B": "https://chat.whatsapp.com/GMLx4aZoxenIBMR8Eew33g",
             "7C": "https://chat.whatsapp.com/E8EDQzBevl5H1AP4eG1ls0",
             "7D": "https://chat.whatsapp.com/C6WNbzlb0dQBdMBudncdXk",
@@ -647,8 +648,8 @@
             "7F": "https://chat.whatsapp.com/DJLSOptqSlZGdpfUJvulf8"
         };
 
-        // Elemen UI
         const searchInput = document.getElementById('search');
+        const searchResults = document.getElementById('search-results');
         const initialState = document.getElementById('initial-state');
         const noResults = document.getElementById('no-results');
         const studentCard = document.getElementById('student-card');
@@ -657,21 +658,17 @@
         const whatsappBtn = document.getElementById('whatsapp-btn');
         const qrcodeDiv = document.getElementById('qrcode');
 
-        // Fungsi untuk menampilkan hasil pencarian
         function showStudentResult(student) {
             initialState.style.display = 'none';
             noResults.style.display = 'none';
             studentCard.style.display = 'block';
+            searchResults.style.display = 'none';
 
-            // Set data siswa
             studentName.textContent = student.nama;
             studentClass.textContent = student.kelas;
-
-            // Set link WhatsApp
             const whatsappLink = whatsappGroups[student.kelas];
             whatsappBtn.href = whatsappLink;
 
-            // Generate QR Code
             qrcodeDiv.innerHTML = '';
             new QRCode(qrcodeDiv, {
                 text: whatsappLink,
@@ -683,46 +680,52 @@
             });
         }
 
-        // Fungsi untuk menampilkan "tidak ditemukan"
         function showNoResults() {
             initialState.style.display = 'none';
             studentCard.style.display = 'none';
             noResults.style.display = 'block';
-            
-            // Scroll ke hasil pencarian
-            noResults.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
 
-        // Fungsi untuk menampilkan state awal
         function showInitialState() {
             initialState.style.display = 'block';
             studentCard.style.display = 'none';
             noResults.style.display = 'none';
+            searchResults.style.display = 'none';
         }
 
-        // Fungsi untuk memfilter data
         function filterStudents(searchTerm) {
             searchTerm = searchTerm.toLowerCase().trim();
-            return students.filter(student => 
-                student.nama.toLowerCase().includes(searchTerm)
-            );
+            return students.filter(student => student.nama.toLowerCase().includes(searchTerm));
         }
 
-        // Event listener untuk pencarian
         searchInput.addEventListener('input', function(e) {
-            const searchTerm = e.target.value;
-            
+            const searchTerm = e.target.value.trim().toLowerCase();
+
+            searchResults.innerHTML = '';
             if (searchTerm.length === 0) {
                 showInitialState();
                 return;
             }
-            
+
             const results = filterStudents(searchTerm);
-            
+
             if (results.length > 0) {
-                // Ambil hasil pertama (bisa dikembangkan untuk multiple results)
-                showStudentResult(results[0]);
+                searchResults.style.display = 'block';
+                results.forEach(student => {
+                    const li = document.createElement('li');
+                    li.textContent = student.nama;
+                    li.style.padding = '10px 15px';
+                    li.style.borderBottom = '1px solid #eee';
+                    li.style.cursor = 'pointer';
+                    li.addEventListener('click', () => {
+                        showStudentResult(student);
+                        searchResults.innerHTML = '';
+                        searchInput.value = student.nama;
+                    });
+                    searchResults.appendChild(li);
+                });
             } else {
+                searchResults.style.display = 'none';
                 showNoResults();
             }
         });
