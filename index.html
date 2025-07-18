@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -130,6 +129,32 @@
             top: 50%;
             transform: translateY(-50%);
             color: var(--text-light);
+        }
+        
+        /* Search Results Dropdown */
+        #search-results {
+            position: absolute;
+            width: calc(100% - 4rem);
+            max-height: 300px;
+            overflow-y: auto;
+            background: var(--white);
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            z-index: 100;
+            display: none;
+        }
+        
+        #search-results li {
+            padding: 10px 15px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            list-style: none;
+            text-align: left;
+            transition: background 0.2s;
+        }
+        
+        #search-results li:hover {
+            background-color: #f5f5f5;
         }
         
         /* Results Section */
@@ -378,277 +403,279 @@
     </header>
     
     <!-- Main Content -->
-    <div class="container">
-        <section class="search-section">
-            <h2 class="search-title">PEMBAGIAN KELAS SEMENTARA</h2>
-             <p>Tuliskan nama ananda disini untuk mendapatkan informasi kelas dan group whatsapp kelas</p>
-            <p>______________</p>
-            <div class="search-box">
-                <i class="fas fa-search search-icon"></i>
-                <input type="text" id="search" placeholder="Ketik nama siswa..." autocomplete="off" autofocus>
-            </div>
-            <ul id="search-results" style="list-style: none; padding: 0; margin: 0; max-height: 300px; overflow-y: auto;"></ul>
-        </section>
-        
-        <div id="results-container">
-            <div id="initial-state" class="initial-state">
-                <i class="fas fa-search"></i>
-                <h2>Cari Siswa Kelas 7</h2>
-                <p>Masukkan nama siswa di kolom pencarian di atas untuk menemukan informasi kelas dan grup WhatsApp resmi</p>
-            </div>
-
-            <div id="no-results" class="no-results" style="display: none;">
-                <i class="fas fa-user-times"></i>
-                <h3>Siswa tidak ditemukan</h3>
-                <p>Pastikan penulisan nama sudah benar</p>
-                
-                <div class="contact-notification">
-                    <p>Jika masih tidak dapat menemukan data Anda, silahkan hubungi:</p>
-                    <a href="https://wa.me/628158842661" target="_blank">
-                        <i class="fab fa-whatsapp"></i>
-                        Miss Sinta (WA: 08158842661)
-                    </a>
+    <main>
+        <div class="container">
+            <section class="search-section">
+                <h2 class="search-title">PEMBAGIAN KELAS SMP ABBS SURAKARTA</h2>
+                <p>Tuliskan nama ananda disini untuk mendapatkan informasi kelas dan group whatsapp kelas</p>
+                <p>______________</p>
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="search" placeholder="Ketik nama siswa..." autocomplete="off" autofocus>
+                    <ul id="search-results"></ul>
                 </div>
-            </div>
+            </section>
             
-            <div id="student-card" class="student-card">
-                <div class="student-info">
-                    <div class="student-name" id="student-name"></div>
-                    <div class="student-class" id="student-class"></div>
+            <div id="results-container">
+                <div id="initial-state" class="initial-state">
+                    <i class="fas fa-search"></i>
+                    <h2>Cari Siswa Kelas 7</h2>
+                    <p>Masukkan nama siswa di kolom pencarian di atas untuk menemukan informasi kelas dan grup WhatsApp resmi</p>
+                </div>
+
+                <div id="no-results" class="no-results" style="display: none;">
+                    <i class="fas fa-user-times"></i>
+                    <h3>Siswa tidak ditemukan</h3>
+                    <p>Pastikan penulisan nama sudah benar</p>
+                    
+                    <div class="contact-notification">
+                        <p>Jika masih tidak dapat menemukan data Anda, silahkan hubungi:</p>
+                        <a href="https://wa.me/628158842661" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                            Miss Sinta (WA: 08158842661)
+                        </a>
+                    </div>
                 </div>
                 
-                <div class="whatsapp-section">
-                    <a id="whatsapp-btn" class="whatsapp-btn" target="_blank">
-                        <i class="fab fa-whatsapp"></i>
-                        Gabung Grup WhatsApp Kelas
-                    </a>
+                <div id="student-card" class="student-card">
+                    <div class="student-info">
+                        <div class="student-name" id="student-name"></div>
+                        <div class="student-class" id="student-class"></div>
+                    </div>
                     
-                    <div class="qrcode-container">
-                        <div id="qrcode"></div>
-                        <p>Scan QR Code untuk bergabung</p>
+                    <div class="whatsapp-section">
+                        <a id="whatsapp-btn" class="whatsapp-btn" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                            Gabung Grup WhatsApp Kelas
+                        </a>
+                        
+                        <div class="qrcode-container">
+                            <div id="qrcode"></div>
+                            <p>Scan QR Code untuk bergabung</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-   <!-- Footer -->
-   <footer>
-    <div class="footer-container">
-        <div class="school-info">
-            <div class="school-name">SMP ABBS Surakarta</div>
-            <div class="school-address">Jl.Tarumanegara III, Banyuanyar, Banjarsari, Surakarta</div>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="school-info">
+                <div class="school-name">SMP ABBS Surakarta</div>
+                <div class="school-address">Jl.Tarumanegara III, Banyuanyar, Banjarsari, Surakarta</div>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2025 SMP ABBS Surakarta.
+            </div>
         </div>
-        
-       
-        
-        <div class="copyright">
-            &copy; 2025 SMP ABBS Surakrta.
-        </div>
-    </div>
-</footer>
+    </footer>
 
-    </div>
-
-    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
     <script>
         const students = [
-        { nama: "Darrel Wili Bara", kelas: "7A" },
-            { nama: "Al-Fath Fitra Akbar Rizqullah", kelas: "7A" },
+            // ===== KELAS 7A =====
+            { nama: "Ahmaddin Haq", kelas: "7A" },
+            { nama: "Akhdan Dzaki Fauzan Amanullah", kelas: "7A" },
+            { nama: "Ardiansyah Kusumawardana", kelas: "7A" },
+            { nama: "Arthur Afzal Suseno", kelas: "7A" },
+            { nama: "Arvian Rifki Sudrajat", kelas: "7A" },
+            { nama: "Astatanu Farras Vilosa", kelas: "7A" },
+            { nama: "Aydin Giandra Al Ghazie", kelas: "7A" },
+            { nama: "Barra Madritirta Hamiseno", kelas: "7A" },
+            { nama: "Benaufal De Rossi", kelas: "7A" },
+            { nama: "Bilal Hasan Damarjati", kelas: "7A" },
+            { nama: "Darrel Wili Bara", kelas: "7A" },
+            { nama: "Dzuan Havist Arkananta", kelas: "7A" },
+            { nama: "Fahim Ahkam Nur Hisyam", kelas: "7A" },
+            { nama: "Faith Quraisy Zada", kelas: "7A" },
+            { nama: "Fathan", kelas: "7A" },
+            { nama: "Ghaazi Ahmad Rasyad", kelas: "7A" },
+            { nama: "Hadrian Juvenal Putra Disena", kelas: "7A" },
+            { nama: "Ivandam Aristo Wibowo", kelas: "7A" },
+            { nama: "Jayden Attallah Haryatmoko", kelas: "7A" },
+            { nama: "Kei Kafi Al Ghazali", kelas: "7A" },
+            { nama: "Moses Aditya Nugroho", kelas: "7A" },
             { nama: "Muhammad Abid Aqeela Pranaja", kelas: "7A" },
             { nama: "Muhammad Al Fathan Yulianto", kelas: "7A" },
-            { nama: "Hanif Albarri Dzulfiqar", kelas: "7A" },
-            { nama: "Muzaffar Fathan K", kelas: "7A" },
-            { nama: "ALFARO FAHMI FAZATAMA", kelas: "7A" },
-            { nama: "Thoriq Andira Putra", kelas: "7A" },
-            { nama: "Hadrian Juvenal Putra Disena", kelas: "7A" },
-            { nama: "Akhdan Dzaki Fauzan Amanullah", kelas: "7A" },
-            { nama: "El Arronabil Tiang Negara", kelas: "7A" },
-            { nama: "Astatanu Farras Vilosa", kelas: "7A" },
-            { nama: "Muhammad Dhava Aji Saputra", kelas: "7A" },
-            { nama: "Oza Dua A Deta", kelas: "7A" },
-            { nama: "faith quraisy zada", kelas: "7A" },
-            { nama: "Kei Kafi Al Ghazali", kelas: "7A" },
-            { nama: "Salman Al Farisi", kelas: "7A" },
-            { nama: "Fahim Ahkam Nur Hisyam", kelas: "7A" },
-            { nama: "Deodan Ravindra", kelas: "7A" },
-            { nama: "Ammar Sakhi Al Faruq", kelas: "7A" },
-            { nama: "Muhammad Brillian Rahadianjaya", kelas: "7A" },
-            { nama: "Bimasena Gibran Putra Natha", kelas: "7A" },
-            { nama: "Muhammad Abrisam Wafiy Maulana", kelas: "7A" },
-            { nama: "Ikhbar Firdaus Al Ahnaf", kelas: "7A" },
+            { nama: "Muhammad Aldi Rizano", kelas: "7A" },
             { nama: "Muhammad Arfa Ammar Rasyidin", kelas: "7A" },
-            { nama: "Jefry Sakha Apriano", kelas: "7A" },
-            { nama: "M Faatih Seferagic Althafurrahman", kelas: "7A" },
-            { nama: "Taufiq Musyaffa Alamsyah", kelas: "7A" },
-            { nama: "Ghaazi Ahmad Rasyad", kelas: "7A" },
-            { nama: "Benaufal De Rossi", kelas: "7A" },
-            { nama: "Fathan Athallah Tiedy", kelas: "7A" },
-            { nama: "Haidar Rasyid Al Ghifari", kelas: "7A" },
-            { nama: "Muhammad Yardan Daniswara", kelas: "7A" },
+            { nama: "Muhammad Brilliant Rahadianjaya", kelas: "7A" },
             { nama: "Muhammad Hariz Ariwibawa", kelas: "7A" },
-            { nama: "Ahmad Arrafi Dzulfikar", kelas: "7A" },
-            { nama: "Fadhil Aqeela Abimanyu", kelas: "7B" },
-            { nama: "Moses Aditya Nugroho", kelas: "7B" },
-            { nama: "Abraham Javier", kelas: "7B" },
-            { nama: "Arthur Afzal Suseno", kelas: "7B" },
-            { nama: "Razan Fadhil Sukoco", kelas: "7B" },
-            { nama: "Hamdan Auriga Abimanyu", kelas: "7B" },
+            { nama: "Muhammad Keane Kaleho", kelas: "7A" },
+            { nama: "Muhammad Navies", kelas: "7A" },
+            { nama: "Qiandra Adhiyastama Fathony", kelas: "7A" },
+            { nama: "Raditya Tristan Suryapradana", kelas: "7A" },
+            { nama: "Sultan Virga Nayaka Fithriadi", kelas: "7A" },
+            { nama: "Taufiq Musyaffa Alamsyah", kelas: "7A" },
+
+            // ===== KELAS 7B =====
+            { nama: "Abidzar Kamil Junior Santoso", kelas: "7B" },
+            { nama: "Abilio Naoki S", kelas: "7B" },
+            { nama: "Afna Zam Iltizam", kelas: "7B" },
+            { nama: "Ahza Muhammad Fayiz", kelas: "7B" },
+            { nama: "Al Ghaffar Rizki Dapriyanto", kelas: "7B" },
+            { nama: "Al-Fath Fitra Akbar Rizqullah", kelas: "7B" },
+            { nama: "Ammar Sakhi Al Faruq", kelas: "7B" },
             { nama: "Barkliw Ibnu Husain Maos Jagad", kelas: "7B" },
-            { nama: "Faeyza Izzul Gresatama", kelas: "7B" },
-            { nama: "Parvez Muhammad Z", kelas: "7B" },
+            { nama: "Bimasena Gibran Putra Natha", kelas: "7B" },
+            { nama: "Eno Kurniawan Dkelces", kelas: "7B" },
+            { nama: "Fadhil Aqeela Abimanyu", kelas: "7B" },
+            { nama: "Faeyza Arfamaula Sukmadi", kelas: "7B" },
             { nama: "Hafizh Radya Kurnia", kelas: "7B" },
             { nama: "Hammasy Kayyis Syauqillah", kelas: "7B" },
-            { nama: "Alvaro Kenzo Nugroho", kelas: "7B" },
-            { nama: "Dzuan Havist Arkananta", kelas: "7B" },
-            { nama: "Sultan Rasyid Habibi", kelas: "7B" },
-            { nama: "Arkan Rawlins Rasendria", kelas: "7B" },
-            { nama: "Bilal Hasan Damarjati", kelas: "7B" },
-            { nama: "Ahza Muhammad Fayiz", kelas: "7B" },
-            { nama: "Naufal Nur Kahfi", kelas: "7B" },
-            { nama: "Fahri Abdullah Tsaqib", kelas: "7B" },
-            { nama: "Ara Azyan Fadli", kelas: "7B" },
-            { nama: "MUHAMMAD FIKRY AL KHOZINIE", kelas: "7B" },
-            { nama: "Al Ghaffar Rizki Dapriyanto", kelas: "7B" },
-            { nama: "Ivandam Aristo Wibowo", kelas: "7B" },
+            { nama: "Kenichi Jusuf Adicandra", kelas: "7B" },
+            { nama: "Kenzie Rangga Bahana", kelas: "7B" },
+            { nama: "M Faatih Seferagic Althafurrahman", kelas: "7B" },
             { nama: "Ferendra Putra Agdhianto", kelas: "7B" },
+            { nama: "Muhammad Abimanyu Wicaksono", kelas: "7B" },
+            { nama: "Muhammad Abrisam Wafiy Maulana", kelas: "7B" },
             { nama: "Muhammad Alwi", kelas: "7B" },
-            { nama: "Muhammad Faishal", kelas: "7B" },
-            { nama: "Abilio Naoki S", kelas: "7B" },
-            { nama: "Razqa Abiyyu Sakha", kelas: "7B" },
-            { nama: "Raditya Tristan Suryapradana", kelas: "7B" },
-            { nama: "Barra Madritirta Hamiseno", kelas: "7B" },
-            { nama: "IZZ NUR FAUZAN", kelas: "7B" },
-            { nama: "Nayaka Aqeela Syahreza", kelas: "7B" },
-            { nama: "Keenand Husna Hudallah", kelas: "7B" },
-            { nama: "Muhammad Keane Kaleho", kelas: "7B" },
-            { nama: "Qiandra Adhiyastama Fathony", kelas: "7C" },
-            { nama: "Affan Fadhil Abyan", kelas: "7C" },
-            { nama: "Juan Maziz Anargya", kelas: "7C" },
-            { nama: "Muhammad Navies", kelas: "7C" },
-            { nama: "Aerobanyu Firdaus Sigkamulya", kelas: "7C" },
-            { nama: "Adhyasta Akbar", kelas: "7C" },
-            { nama: "Abidzar Kamil Junior Santoso", kelas: "7C" },
-            { nama: "Fathan", kelas: "7C" },
-            { nama: "Aydin Giandra Al Ghazie", kelas: "7C" },
-            { nama: "Ardiansyah Kusumawardana", kelas: "7C" },
-            { nama: "Kenichi Jusuf Adicandra", kelas: "7C" },
-            { nama: "Muhammad Daffa Arya Gozzan", kelas: "7C" },
-            { nama: "Ahmad Mughni Alifsamputra", kelas: "7C" },
-            { nama: "Gaza Fadi Mustajab", kelas: "7C" },
-            { nama: "Azka Daniswara Hardi Ramadhan", kelas: "7C" },
-            { nama: "Naizar Faeyza Ahnaf", kelas: "7C" },
-            { nama: "Faeyza arfamaula sukmadi", kelas: "7C" },
-            { nama: "Eno Kurniawan Dkelces", kelas: "7C" },
-            { nama: "Muhammad Aldi Rizano", kelas: "7C" },
-            { nama: "Muhammad Faqih Abdullah Nugroho", kelas: "7C" },
-            { nama: "Sultan Virga Nayaka Fithriadi", kelas: "7C" },
-            { nama: "Nafitsani Aryasatya Wibowo", kelas: "7C" },
-            { nama: "Muammar Galang Al Rafii", kelas: "7C" },
-            { nama: "Kenzie Rangga bahana", kelas: "7C" },
-            { nama: "Gilby Alauna Rowi", kelas: "7C" },
-            { nama: "Afna Zam Iltizam", kelas: "7C" },
-            { nama: "Naufal Rosiduddin Syarif", kelas: "7C" },
-            { nama: "MUHAMMAD RO'ID JIYAD", kelas: "7C" },
-            { nama: "Jayden attallah haryatmoko", kelas: "7C" },
-            { nama: "Nazran Ar Rais", kelas: "7C" },
-            { nama: "Muhammad Abimanyu Wicaksono", kelas: "7C" },
-            { nama: "Riyadhul Jinan Husni", kelas: "7C" },
-            { nama: "Ahmad Maulana Hakim", kelas: "7C" },
-            { nama: "Raditya Furqon Ar Rashid", kelas: "7C" },
-            { nama: "Ayse Hygela Destyara", kelas: "7D" },
-            { nama: "Dewi Aulia Putri Fieta", kelas: "7D" },
-            { nama: "Kamila 'Aisy Risqiya", kelas: "7D" },
-            { nama: "Karaissa Amirah Nailatul Izzah", kelas: "7D" },
-            { nama: "Latifa nadira hafidzah", kelas: "7D" },
-            { nama: "Azalea Anara Khalisa Putri", kelas: "7D" },
-            { nama: "Naquita Azzahra Dira", kelas: "7D" },
-            { nama: "Farsya Mumtazaha Al Farabi", kelas: "7D" },
-            { nama: "Zerra Kiana Al Is'aff", kelas: "7D" },
-            { nama: "Az Zahra Elvira Virzandi Ardian", kelas: "7D" },
-            { nama: "KHANZA ALKAYLA GUNAWAN", kelas: "7D" },
-            { nama: "Nasywa Khoirunnisa", kelas: "7D" },
-            { nama: "Shodan Fatiha Syakira Khansa", kelas: "7D" },
-            { nama: "Nurazizahtul Fadhillah Ahmad", kelas: "7D" },
-            { nama: "Aqila Nashwa Isnania", kelas: "7D" },
-            { nama: "Fariha Ayla Zahra Attaufiq", kelas: "7D" },
-            { nama: "Adiva Putri Hanan Diandra", kelas: "7D" },
-            { nama: "Efa Nur'aini", kelas: "7D" },
-            { nama: "Nafisah Azizah", kelas: "7D" },
-            { nama: "Almasyifa Kanaya Bathi", kelas: "7D" },
-            { nama: "Lakeisha Anindya Harjanto", kelas: "7D" },
-            { nama: "Cahaya Ramadhani", kelas: "7D" },
-            { nama: "Zahrah Zhufairah Santoso", kelas: "7D" },
-            { nama: "Ainun Nissa Nabillah Hebat", kelas: "7D" },
-            { nama: "Arteria Kania Sofyan", kelas: "7D" },
-            { nama: "Adifa Fatin Maghfirah", kelas: "7D" },
-            { nama: "Andhina Violeta Pramatyadeva", kelas: "7D" },
-            { nama: "Afifah Ayu Nur Iskhalifah", kelas: "7E" },
-            { nama: "Hasna Latifah", kelas: "7E" },
-            { nama: "Nadhifa Amalia", kelas: "7E" },
-            { nama: "Haifa Kaila E", kelas: "7E" },
-            { nama: "Zhaafirah Fadhilah Putri S.B", kelas: "7E" },
-            { nama: "Sarah Azzahra Kurniadi", kelas: "7E" },
-            { nama: "Chayra Zoya Al Hidayat", kelas: "7E" },
-            { nama: "Syalia Zahraina Rahmadi", kelas: "7E" },
-            { nama: "Khanza Aghnia Janneta", kelas: "7E" },
-            { nama: "Chesta Adlina Zakiyah", kelas: "7E" },
-            { nama: "ARUMY JASMINE YANURI", kelas: "7E" },
-            { nama: "Sheza Aleesya danurdara", kelas: "7E" },
-            { nama: "Ranyshia Putri Prasetyo", kelas: "7E" },
-            { nama: "Kayyisa Alifa Salma", kelas: "7E" },
-            { nama: "Khanza Aqiila Widary Suparno", kelas: "7E" },
-            { nama: "Aya Sofya soetino", kelas: "7E" },
-            { nama: "Tamara Amelia", kelas: "7E" },
-            { nama: "Dzakiya Uzma Salsabila", kelas: "7E" },
-            { nama: "Gradesya Derrella Zian Khatulistiwa", kelas: "7E" },
-            { nama: "Khansa Khaira Syahida", kelas: "7E" },
-            { nama: "Maheswara Tribuwana Tunggadewi", kelas: "7E" },
-            { nama: "Khansa Tasmira Uzda", kelas: "7E" },
-            { nama: "Rifda Khalisa Mannaf", kelas: "7E" },
-            { nama: "Raisa Adila Lathifa", kelas: "7E" },
-            { nama: "Marsha Khumaira Wibowo", kelas: "7E" },
-            { nama: "Arini Zhafirah Putri", kelas: "7E" },
-            { nama: "Kirana Ramadhania Larasati", kelas: "7E" },
-            { nama: "Tiara Sekar Nareswari", kelas: "7F" },
-            { nama: "Aufa Erhusna", kelas: "7F" },
-            { nama: "Husna Fadhila Az zahra", kelas: "7F" },
-            { nama: "Deandra Raissa Anthony", kelas: "7F" },
-            { nama: "Zara Nadia Akhyar", kelas: "7F" },
-            { nama: "Putri Aqila Zaneta", kelas: "7F" },
-            { nama: "Fazila Inas Tasnim Mimosa", kelas: "7F" },
-            { nama: "Azizah Nirmala Putri", kelas: "7F" },
-            { nama: "Jehanara Arimbi Zuhairiyah Ahmad", kelas: "7F" },
-            { nama: "Kuni Rafa Saira", kelas: "7F" },
-            { nama: "Daevika Syarifa Sunarto Putri", kelas: "7F" },
-            { nama: "Zahwa Zahira Zahsy", kelas: "7F" },
-            { nama: "Khalisa Fahma M", kelas: "7F" },
-            { nama: "Naura Hidayatul Muslihah", kelas: "7F" },
-            { nama: "Camile Adelia", kelas: "7F" },
-            { nama: "Maylin Zahira", kelas: "7F" },
-            { nama: "Althafunnisa", kelas: "7F" },
-            { nama: "Khansa Aqila Aljaneta", kelas: "7F" },
-            { nama: "Kayyisa Naura Rafifah", kelas: "7F" },
-            { nama: "Afrin Rumaisha", kelas: "7F" },
-            { nama: "Nasyafa Azzahra Putri", kelas: "7F" },
-            { nama: "Asha Kurniadynata", kelas: "7F" },
-            { nama: "Khanza Atha Rohidah", kelas: "7F" },
-            { nama: "Yovinda", kelas: "7F" },
-            { nama: "Nagisa Sachi Swardani", kelas: "7F" },
-            { nama: "Aldila Zahrana Rahmadita", kelas: "7F" },
-            { nama: "Azenda Zavania Bilqis", kelas: "7F" }
-    
+            { nama: "Muhammad Daffa Arya Gozzan", kelas: "7B" },
+            { nama: "Muhammad Ro'id Jiyad", kelas: "7B" },
+            { nama: "Nafitsani Aryasatya Wibowo", kelas: "7B" },
+            { nama: "Naizar Faeyza Ahnaf", kelas: "7B" },
+            { nama: "Naufal Nur Kahfi", kelas: "7B" },
+            { nama: "Naufal Rosiduddin Syarif", kelas: "7B" },
+            { nama: "Nazran Ar Rais", kelas: "7B" },
+            { nama: "Oza Dua A Deta", kelas: "7B" },
+            { nama: "Parvez Muhammad Z", kelas: "7B" },
+            { nama: "Riyadhul Jinan Husni", kelas: "7B" },
+            { nama: "Sultan Rasyid Habibi", kelas: "7B" },
+            { nama: "Thoriq Andira Putra", kelas: "7B" },
 
+            // ===== KELAS 7C =====
+            { nama: "Abraham Javier", kelas: "7C" },
+            { nama: "Adhyasta Akbar", kelas: "7C" },
+            { nama: "Aerobanyu Firdaus Sigkamulya", kelas: "7C" },
+            { nama: "Affan Fadhil Abyan", kelas: "7C" },
+            { nama: "Ahmad Arrafi Dzulfikar", kelas: "7C" },
+            { nama: "Ahmad Maulana Hakim", kelas: "7C" },
+            { nama: "Ahmad Mughni Alifsamputra", kelas: "7C" },
+            { nama: "Alvaro Kenzo Nugroho", kelas: "7C" },
+            { nama: "Arkan Rawlins Rasendria", kelas: "7C" },
+            { nama: "Azka Daniswara Hardi Ramadhan", kelas: "7C" },
+            { nama: "Deodan Ravindra", kelas: "7C" },
+            { nama: "El Arronabil Tiang Negara", kelas: "7C" },
+            { nama: "Faeyza Izzul Grestama", kelas: "7C" },
+            { nama: "Fahri Abdullah Tsaqib", kelas: "7C" },
+            { nama: "Gilby Alauna Rowi", kelas: "7C" },
+            { nama: "Haidar Rasyid Al Ghifari", kelas: "7C" },
+            { nama: "Hamdan Auriga Abimanyu", kelas: "7C" },
+            { nama: "Ikhbar Firdaus Al Ahnaf", kelas: "7C" },
+            { nama: "Izz Nur Fauzan", kelas: "7C" },
+            { nama: "Juan Maziz Anargya", kelas: "7C" },
+            { nama: "Keenand Husna Hudallah", kelas: "7C" },
+            { nama: "Muammar Galang Al Rafii", kelas: "7C" },
+            { nama: "Muhammad Dhava Aji Saputra", kelas: "7C" },
+            { nama: "Muhammad Faishal", kelas: "7C" },
+            { nama: "Muhammad Faqih Abdullah Nugroho", kelas: "7C" },
+            { nama: "Muhammad Fikry Al Khozinie", kelas: "7C" },
+            { nama: "Muhammad Yardan Daniswara", kelas: "7C" },
+            { nama: "Muzaffar Fathan K", kelas: "7C" },
+            { nama: "Nayaka Aqeela Syahreza", kelas: "7C" },
+            { nama: "Raditya Furqon Ar Rashid", kelas: "7C" },
+            { nama: "Razan Fadhil Sukoco", kelas: "7C" },
+            { nama: "Razqa Abiyyu Sakha", kelas: "7C" },
+            { nama: "Salman Al Farisi", kelas: "7C" },
+            { nama: "Gaza Fadi Mustajab", kelas: "7C" },
+
+            // ===== KELAS 7D =====
+            { nama: "Ainun Nissa Nabillah Hebat", kelas: "7D" },
+            { nama: "Althafunnisa", kelas: "7D" },
+            { nama: "Aqila Nashwa Isnania", kelas: "7D" },
+            { nama: "Arteria Kania Sofyan", kelas: "7D" },
+            { nama: "Arumy Jasmine Yanuri", kelas: "7D" },
+            { nama: "Auffa Erhusna", kelas: "7D" },
+            { nama: "Ayse Hygeia Destyara", kelas: "7D" },
+            { nama: "Azizah Nirmala Putri", kelas: "7D" },
+            { nama: "Camile Adelia", kelas: "7D" },
+            { nama: "Chesta Adlina Zakiyah", kelas: "7D" },
+            { nama: "Deandra Raissa Anthony", kelas: "7D" },
+            { nama: "Khansa Khaira Syahida", kelas: "7D" },
+            { nama: "Khanza Aghnia Janneta", kelas: "7D" },
+            { nama: "Haifa Kaila E", kelas: "7D" },
+            { nama: "Maheswara Tribuwana Tunggadewi", kelas: "7D" },
+            { nama: "Nagisa Sachi Swardani", kelas: "7D" },
+            { nama: "Naura Hidayatul Muslihah", kelas: "7D" },
+            { nama: "Putri Aqila Zaneta", kelas: "7D" },
+            { nama: "Raisa Adila Lathifa", kelas: "7D" },
+            { nama: "Ranyshia Putri Prasetyo", kelas: "7D" },
+            { nama: "Rifda Khalisa Mannaf", kelas: "7D" },
+            { nama: "Sheza Aleesya Danurdara", kelas: "7D" },
+            { nama: "Tamara Amelia", kelas: "7D" },
+            { nama: "Tiara Sekar Nareswari", kelas: "7D" },
+            { nama: "Zahwa Zahira Zahsy", kelas: "7D" },
+
+            // ===== KELAS 7E =====
+            { nama: "Adifa Fatin Maghfirah", kelas: "7E" },
+            { nama: "Adiva Putri Hanan Diandra", kelas: "7E" },
+            { nama: "Afrin Rumaisha", kelas: "7E" },
+            { nama: "Aldila Zahrana Rahmadita", kelas: "7E" },
+            { nama: "Andhina Violeta Pramatyadeva", kelas: "7E" },
+            { nama: "Ara Azyan Fadli", kelas: "7E" },
+            { nama: "Aya Sofya Soetino", kelas: "7E" },
+            { nama: "Az Zahra Elvira Virzandi Ardian", kelas: "7E" },
+            { nama: "Azalea Anara Khalisa Putri", kelas: "7E" },
+            { nama: "Azenda Zavania Bilqis", kelas: "7E" },
+            { nama: "Daevika Syarifa Sunarto Putri", kelas: "7E" },
+            { nama: "Efa Nur'aini", kelas: "7E" },
+            { nama: "Farsya Mumtazaha Al Farabi", kelas: "7E" },
+            { nama: "Gradesya Derrella Zian Khatulistiwa", kelas: "7E" },
+            { nama: "Lakeisha Anindya Harjanto", kelas: "7E" },
+            { nama: "Jehanara Arimbi Zuhairiyah Ahmad", kelas: "7E" },
+            { nama: "Kamila 'Aisy Risqiya", kelas: "7E" },
+            { nama: "Karaissa Amirah Nailatul Izzah", kelas: "7E" },
+            { nama: "Khanza Alkayla Gunawan", kelas: "7E" },
+            { nama: "Khanza Atha Rohidah", kelas: "7E" },
+            { nama: "Kirana Ramadhania Larasati", kelas: "7E" },
+            { nama: "Nafisah Azizah Dzakiyah Putri Purwoko", kelas: "7E" },
+            { nama: "Naquita Azzahra Dira", kelas: "7E" },
+            { nama: "Nasyafa Azzahra Putri", kelas: "7E" },
+            { nama: "Syalia Zahraina Rahmadi", kelas: "7E" },
+            { nama: "Zerra Kiana Al Is'aff", kelas: "7E" },
+
+            // ===== KELAS 7F =====
+            { nama: "Afifah Ayu Nur Iskhalifah", kelas: "7F" },
+            { nama: "Almasyifa Kanaya Bathi", kelas: "7F" },
+            { nama: "Arini Zhafirah Putri", kelas: "7F" },
+            { nama: "Asha Kurniadynata", kelas: "7F" },
+            { nama: "Cahaya Ramadhani", kelas: "7F" },
+            { nama: "Chayra Zoya Al Hidayat", kelas: "7F" },
+            { nama: "Dewi Aulia Putri Fieta", kelas: "7F" },
+            { nama: "Dzakiya Uzma Salsabila", kelas: "7F" },
+            { nama: "Fariha Ayla Zahra Attaufiq", kelas: "7F" },
+            { nama: "Fazila Inas Tasnim Mimosa", kelas: "7F" },
+            { nama: "Hasna Latifah", kelas: "7F" },
+            { nama: "Husna Fadhila Az Zahra", kelas: "7F" },
+            { nama: "Kayyisa Alifa Salma", kelas: "7F" },
+            { nama: "Kayyisa Naura Rafifah", kelas: "7F" },
+            { nama: "Khansa Aqila Aljaneta", kelas: "7F" },
+            { nama: "Khansa Tasmira Uzda", kelas: "7F" },
+            { nama: "Khanza Aqiila Widary Suparno", kelas: "7F" },
+            { nama: "Kuni Rafa Saira", kelas: "7F" },
+            { nama: "Marsha Khumaira Wibowo", kelas: "7F" },
+            { nama: "Maylin Zahira", kelas: "7F" },
+            { nama: "Nasywa Khoirunnisa", kelas: "7F" },
+            { nama: "Nurazizahtul Fadhillah Ahmad", kelas: "7F" },
+            { nama: "Sarah Azzahra Kurniadi", kelas: "7F" },
+            { nama: "Shodan Fatiha Syakira Khansa", kelas: "7F" },
+            { nama: "Yovinda", kelas: "7F" },
+            { nama: "Zahrah Zhufairah Santoso", kelas: "7F" },
+            { nama: "Zara Nadia Akhyar", kelas: "7F" }
         ];
 
         const whatsappGroups = {
-           "7A": "https://chat.whatsapp.com/G786Lbbwt9R3XtqjyUluXh",
-            "7B": "https://chat.whatsapp.com/GMLx4aZoxenIBMR8Eew33g",
-            "7C": "https://chat.whatsapp.com/E8EDQzBevl5H1AP4eG1ls0",
-            "7D": "https://chat.whatsapp.com/C6WNbzlb0dQBdMBudncdXk",
-            "7E": "https://chat.whatsapp.com/KqHcYwlv8XHHwG32Kh87fu",
-            "7F": "https://chat.whatsapp.com/DJLSOptqSlZGdpfUJvulf8"
+            "7A": "https://chat.whatsapp.com/Lt2bvzBQUW8CNHknGuVkfT",
+            "7B": "https://chat.whatsapp.com/BD7Asu2Ttow6iobpBlKsvc?mode=ac_t",
+            "7C": "https://chat.whatsapp.com/LKIZP7sMCQf1JrxJQlgUkY?mode=ac_c",
+            "7D": "https://chat.whatsapp.com/G79dm9hD6vf54o7cTBTybR?mode=r_c",
+            "7E": "https://chat.whatsapp.com/Fm2futLDzhqK1lkA79GogN?mode=ac_t",
+            "7F": "hthttps://chat.whatsapp.com/Fch1ZTSxLMhEwN2Q5sA0D3?mode=r_c"
         };
 
+        // DOM Elements
         const searchInput = document.getElementById('search');
         const searchResults = document.getElementById('search-results');
         const initialState = document.getElementById('initial-state');
@@ -659,6 +686,7 @@
         const whatsappBtn = document.getElementById('whatsapp-btn');
         const qrcodeDiv = document.getElementById('qrcode');
 
+        // Show student result
         function showStudentResult(student) {
             initialState.style.display = 'none';
             noResults.style.display = 'none';
@@ -670,7 +698,10 @@
             const whatsappLink = whatsappGroups[student.kelas];
             whatsappBtn.href = whatsappLink;
 
+            // Clear previous QR code
             qrcodeDiv.innerHTML = '';
+            
+            // Generate new QR code
             new QRCode(qrcodeDiv, {
                 text: whatsappLink,
                 width: 150,
@@ -681,12 +712,15 @@
             });
         }
 
+        // Show no results message
         function showNoResults() {
             initialState.style.display = 'none';
             studentCard.style.display = 'none';
             noResults.style.display = 'block';
+            searchResults.style.display = 'none';
         }
 
+        // Show initial state
         function showInitialState() {
             initialState.style.display = 'block';
             studentCard.style.display = 'none';
@@ -694,17 +728,22 @@
             searchResults.style.display = 'none';
         }
 
+        // Filter students based on search term
         function filterStudents(searchTerm) {
             searchTerm = searchTerm.toLowerCase().trim();
-            return students.filter(student => student.nama.toLowerCase().includes(searchTerm));
+            return students.filter(student => 
+                student.nama.toLowerCase().includes(searchTerm)
+            );
         }
 
+        // Handle search input
         searchInput.addEventListener('input', function(e) {
-            const searchTerm = e.target.value.trim().toLowerCase();
-
+            const searchTerm = e.target.value.trim();
             searchResults.innerHTML = '';
+
             if (searchTerm.length === 0) {
                 showInitialState();
+                searchResults.style.display = 'none';
                 return;
             }
 
@@ -715,13 +754,10 @@
                 results.forEach(student => {
                     const li = document.createElement('li');
                     li.textContent = student.nama;
-                    li.style.padding = '10px 15px';
-                    li.style.borderBottom = '1px solid #eee';
-                    li.style.cursor = 'pointer';
                     li.addEventListener('click', () => {
                         showStudentResult(student);
-                        searchResults.innerHTML = '';
                         searchInput.value = student.nama;
+                        searchResults.style.display = 'none';
                     });
                     searchResults.appendChild(li);
                 });
@@ -730,6 +766,16 @@
                 showNoResults();
             }
         });
+
+        // Hide results when clicking outside
+        document.addEventListener('click', function(e) {
+            if (e.target !== searchInput && e.target !== searchResults) {
+                searchResults.style.display = 'none';
+            }
+        });
+
+        // Show initial state when page loads
+        showInitialState();
     </script>
 </body>
 </html>
